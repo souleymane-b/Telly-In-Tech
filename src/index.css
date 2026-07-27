@@ -1,0 +1,265 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    @apply bg-white text-gray-800 antialiased;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .dark body {
+    @apply bg-navy-900 text-gray-100;
+  }
+}
+
+@layer utilities {
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .animate-on-scroll-left {
+    opacity: 0;
+    transform: translateX(-40px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .animate-on-scroll-left.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .animate-on-scroll-right {
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .animate-on-scroll-right.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .animate-on-scroll-scale {
+    opacity: 0;
+    transform: scale(0.92);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .animate-on-scroll-scale.is-visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .delay-0 { transition-delay: 0ms; }
+  .delay-100 { transition-delay: 100ms; }
+  .delay-200 { transition-delay: 200ms; }
+  .delay-300 { transition-delay: 300ms; }
+  .delay-400 { transition-delay: 400ms; }
+  .delay-500 { transition-delay: 500ms; }
+  .delay-600 { transition-delay: 600ms; }
+  .delay-700 { transition-delay: 700ms; }
+  .delay-800 { transition-delay: 800ms; }
+
+  .text-gradient-orange {
+    background: linear-gradient(135deg, #ea570d, #f47a3d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-blue {
+    background: linear-gradient(135deg, #0c71b9, #41a4e7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-kinetic {
+    background: linear-gradient(135deg, #212d55, #0c71b9, #ea570d, #0c71b9, #212d55);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 8s ease infinite;
+  }
+
+  .glass {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .glass-dark {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    background: rgba(33, 45, 85, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .shimmer-bg {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.15) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2.5s linear infinite;
+  }
+
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #212d55, #0c71b9);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #0c71b9, #ea570d);
+}
+
+/* ============================================================
+   Animation delay utilities — needed for Hero staggered reveals
+   (animation-fill-mode: both = start from first keyframe, hold last)
+   ============================================================ */
+.animate-fade-up,
+.animate-fade-in,
+.animate-scale-in,
+.page-enter {
+  animation-fill-mode: both !important;
+}
+
+.animation-delay-100  { animation-delay: 100ms;  animation-fill-mode: both; }
+.animation-delay-200  { animation-delay: 200ms;  animation-fill-mode: both; }
+.animation-delay-300  { animation-delay: 300ms;  animation-fill-mode: both; }
+.animation-delay-400  { animation-delay: 400ms;  animation-fill-mode: both; }
+.animation-delay-500  { animation-delay: 500ms;  animation-fill-mode: both; }
+.animation-delay-600  { animation-delay: 600ms;  animation-fill-mode: both; }
+.animation-delay-700  { animation-delay: 700ms;  animation-fill-mode: both; }
+.animation-delay-800  { animation-delay: 800ms;  animation-fill-mode: both; }
+.animation-delay-900  { animation-delay: 900ms;  animation-fill-mode: both; }
+.animation-delay-1000 { animation-delay: 1000ms; animation-fill-mode: both; }
+.animation-delay-1100 { animation-delay: 1100ms; animation-fill-mode: both; }
+.animation-delay-1300 { animation-delay: 1300ms; animation-fill-mode: both; }
+.animation-delay-1500 { animation-delay: 1500ms; animation-fill-mode: both; }
+.animation-delay-1700 { animation-delay: 1700ms; animation-fill-mode: both; }
+.animation-delay-2000 { animation-delay: 2000ms; animation-fill-mode: both; }
+
+/* Navbar transition */
+.navbar-transparent {
+  background: transparent;
+}
+
+.navbar-solid {
+  background: rgba(33, 45, 85, 0.97);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.15);
+}
+
+/* Page transition */
+.page-enter {
+  animation: pageEnter 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes pageEnter {
+  0% { opacity: 0; transform: translateY(12px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Magnetic button hover effect */
+.magnetic-btn {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Tilt card */
+.tilt-card {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+  transform-style: preserve-3d;
+}
+
+/* Marquee container */
+.marquee-container {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+
+.marquee-container-reverse {
+  display: flex;
+  width: max-content;
+  animation: marqueeReverse 30s linear infinite;
+}
+
+.marquee-container:hover,
+.marquee-container-reverse:hover {
+  animation-play-state: paused;
+}
+
+/* Gradient text shimmer for headings */
+.shimmer-text {
+  background: linear-gradient(90deg, #212d55 0%, #0c71b9 50%, #212d55 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
+
+/* Reveal mask animation */
+.reveal-mask {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-mask.is-visible {
+  clip-path: inset(0 0 0 0);
+}
+
+/* Noise texture overlay */
+.noise-overlay {
+  position: relative;
+}
+.noise-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
