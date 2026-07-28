@@ -60,6 +60,9 @@ const team: Member[] = [
     "TypeScript",
     "API Development"
   ]
+    photo: 'https://cdn.discordapp.com/attachments/1348907267956670474/1531661627630420109/content.png?ex=6a6a068c&is=6a68b50c&hm=9f2ad8fb3ca549dff1224c287799ece3a414bed0b530f0b86ec842787bdc1e66&',
+    socials: { linkedin: '#', twitter: '#', email: 'souleymane@tellyintech.com' },
+    accent: 'orange',
 },
   {
     name: 'Maimouna Faye Guene',
