@@ -40,16 +40,27 @@ const team: Member[] = [
     accent: 'electric',
   },
   {
-    name: 'Souleymane Ndiaye',
-    role: 'Lead Full-Stack Developer',
-    bio: "Développeur passionné et méticuleux, Souleymane transforme les idées en applications fonctionnelles. Du front-end au back-end, il code avec précision et veille à la performance.",
-    bioEn: "Passionate and meticulous developer, Souleymane turns ideas into functional applications. From front-end to back-end, he codes with precision and ensures performance.",
-    expertise: ['React', 'Node.js', 'APIs'],
-    expertiseEn: ['React', 'Node.js', 'APIs'],
-    photo: 'https://cdn.discordapp.com/attachments/1348907267956670474/1531661627630420109/content.png?ex=6a6a068c&is=6a68b50c&hm=9f2ad8fb3ca549dff1224c287799ece3a414bed0b530f0b86ec842787bdc1e66&',
-    socials: { linkedin: '#', twitter: '#', email: 'souleymane@tellyintech.com' },
-    accent: 'orange',
-  },
+  name: "Souleymane Ndiaye",
+  role: "Lead Full-Stack Developer",
+  department: "Engineering",
+  tagline: "Building scalable digital experiences.",
+  bio: "Souleymane conçoit et développe des applications web et mobiles modernes, en mettant l'accent sur la performance, la sécurité et une expérience utilisateur de qualité. Il participe aux choix d'architecture technique et veille à la qualité du code tout au long du cycle de développement.",
+  bioEn: "Souleymane designs and develops modern web and mobile applications with a strong focus on performance, security, and user experience. He contributes to technical architecture decisions and ensures high code quality throughout the development lifecycle.",
+  expertise: [
+    "React",
+    "Next.js",
+    "Node.js",
+    "TypeScript",
+    "API Development"
+  ],
+  expertiseEn: [
+    "React",
+    "Next.js",
+    "Node.js",
+    "TypeScript",
+    "API Development"
+  ]
+}
   {
     name: 'Maimouna Faye Guene',
     role: 'UX/UI & Product Designer',
