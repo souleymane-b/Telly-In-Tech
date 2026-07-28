@@ -24,7 +24,7 @@ const team: Member[] = [
     bioEn: "Visionary and strategist, Alpha steers Telly InTech with a deep conviction: digital technology can transform Guinea. He orchestrates growth, partnerships and the company's mission.",
     expertise: ['Stratégie', 'Leadership', 'Partenariats'],
     expertiseEn: ['Strategy', 'Leadership', 'Partnerships'],
-    photo: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=600',
+    photo: 'https://media.licdn.com/dms/image/v2/D4E03AQEzmlhIIParuQ/profile-displayphoto-shrink_800_800/B4EZUzNs4tHMAk-/0/1740320985239?e=1786579200&v=beta&t=JgOi_T2_b3vaHvJNCJ5_igY1cU-j-77WMtztjBZBGP0?auto=compress&cs=tinysrgb&w=600',
     socials: { linkedin: '#', twitter: '#', email: 'alpha@tellyintech.com' },
     accent: 'orange',
   },
