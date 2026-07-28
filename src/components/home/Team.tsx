@@ -57,7 +57,7 @@ const team: Member[] = [
     bioEn: "Creative and empathetic, Maimouna crafts digital experiences that speak to users. She blends aesthetics, ergonomics and brand identity in every interface.",
     expertise: ['UX Design', 'UI Design', 'Branding'],
     expertiseEn: ['UX Design', 'UI Design', 'Branding'],
-    photo: 'https://images.pexels.com/photos/3760263/pexels-photo-3760263.jpeg?auto=compress&cs=tinysrgb&w=600',
+    photo: 'https://media.licdn.com/dms/image/v2/D4E03AQFBWpDmQf5sqA/profile-displayphoto-shrink_800_800/B4EZgTuQk.H4Ag-/0/1752677550889?e=1786579200&v=beta&t=1STqEoKSiJqWNmzpgf9zvq1sxtO3es4nTbYn_vtpmPg',
     socials: { linkedin: '#', twitter: '#', email: 'maimouna@tellyintech.com' },
     accent: 'electric',
   },
