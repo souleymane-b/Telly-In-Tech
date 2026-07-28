@@ -89,6 +89,12 @@ export const translations = {
       title: 'Ce que disent nos clients',
       subtitle: 'TÉMOIGNAGES',
     },
+    team: {
+      title: 'Notre Équipe',
+      subtitle: 'LES VISAGES DERREIRE TELLY INTECH',
+      description: 'Une équipe passionnée et pluridisciplinaire, unie par la volonté de transformer le paysage digital guinéen.',
+      connect: 'Connecter',
+    },
     about: {
       title: 'À Propos de Telly InTech',
       subtitle: 'QUI SOMMES-NOUS',
@@ -228,6 +234,12 @@ export const translations = {
     testimonials: {
       title: 'What our clients say',
       subtitle: 'TESTIMONIALS',
+    },
+    team: {
+      title: 'Our Team',
+      subtitle: 'THE FACES BEHIND TELLY INTECH',
+      description: 'A passionate, multidisciplinary team united by the will to transform the Guinean digital landscape.',
+      connect: 'Connect',
     },
     about: {
       title: 'About Telly InTech',
