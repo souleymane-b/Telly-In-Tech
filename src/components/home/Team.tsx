@@ -1,216 +1,263 @@
-import { useState } from 'react';
-import { Linkedin, Twitter, Mail } from 'lucide-react';
-import { useLanguage } from '@/hooks/useLanguage';
-import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import SectionHeader from '@/components/ui/SectionHeader';
+import { Target, Eye, Heart, Check, MapPin, ArrowRight } from 'lucide-react';
 
-interface Member {
-  name: string;
-  role: string;
-  bio: string;
-  bioEn: string;
-  expertise: string[];
-  expertiseEn: string[];
-  photo: string;
-  socials: { linkedin?: string; twitter?: string; email?: string };
-  accent: 'orange' | 'electric';
-}
+const colors = {
+  navy: '#0B1B3A',
+  navySoft: '#1C3766',
+  electric: '#2F6FED',
+  electricSoft: '#E8F0FE',
+  orange: '#F6821F',
+  orangeSoft: '#FDECDA',
+  cream: '#F7F7F5',
+  ink: '#0B1B3A',
+  slate: '#5B6478',
+};
 
-const team: Member[] = [
+const pillars = [
   {
-    name: 'Alpha Missibaw Diallo',
-    role: 'Co-founder & CEO',
-    bio: "Visionnaire et stratège, Alpha pilote la direction de Telly InTech avec une conviction profonde : le numérique peut transformer la Guinée. Il orchestre la croissance, les partenariats et la mission de l'entreprise.",
-    bioEn: "Visionary and strategist, Alpha steers Telly InTech with a deep conviction: digital technology can transform Guinea. He orchestrates growth, partnerships and the company's mission.",
-    expertise: ['Stratégie', 'Leadership', 'Partenariats'],
-    expertiseEn: ['Strategy', 'Leadership', 'Partnerships'],
-    photo: 'https://media.licdn.com/dms/image/v2/D4E03AQEzmlhIIParuQ/profile-displayphoto-shrink_800_800/B4EZUzNs4tHMAk-/0/1740320985239?e=1786579200&v=beta&t=JgOi_T2_b3vaHvJNCJ5_igY1cU-j-77WMtztjBZBGP0',
-    socials: { linkedin: '#', twitter: '#', email: 'alpha@tellyintech.com' },
+    icon: Target,
+    title: 'Mission',
+    text: "Accompagner la transformation digitale de la Guinée en combinant expertise technique, engagement social et ancrage profond dans les réalités locales.",
     accent: 'orange',
   },
   {
-    name: 'Moussa Basse',
-    role: 'Co-founder & CTO',
-    bio: "Architecte technique et bâtisseur, Moussa conçoit les infrastructures robustes qui soutiennent chaque projet. De l'architecture cloud à la sécurité, il veille à l'excellence technique.",
-    bioEn: "Technical architect and builder, Moussa designs the robust infrastructures behind every project. From cloud architecture to security, he ensures technical excellence.",
-    expertise: ['Architecture', 'Cloud', 'Sécurité'],
-    expertiseEn: ['Architecture', 'Cloud', 'Security'],
-    photo: 'https://media.licdn.com/dms/image/v2/D4E03AQGwMwepFDX5Gw/profile-displayphoto-crop_800_800/B4EZhHd_DSHoAI-/0/1753545700204?e=1786579200&v=beta&t=Q1e3wgsnuuJyAgVmaLoKfUf7PyK8lQZ-i54GOYzArN4',
-    socials: { linkedin: '#', twitter: '#', email: 'moussa@tellyintech.com' },
+    icon: Eye,
+    title: 'Vision',
+    text: "Une Guinée où chaque entreprise, association et initiative citoyenne est visible, crédible et connectée au monde.",
     accent: 'electric',
   },
   {
-    name: 'Souleymane Ndiaye',
-    role: 'Lead Full-Stack Developer',
-    bio: "Développeur passionné et méticuleux, Souleymane transforme les idées en applications fonctionnelles. Du front-end au back-end, il code avec précision et veille à la performance.",
-    bioEn: "Passionate and meticulous developer, Souleymane turns ideas into functional applications. From front-end to back-end, he codes with precision and ensures performance.",
-    expertise: ['React', 'Node.js', 'APIs'],
-    expertiseEn: ['React', 'Node.js', 'APIs'],
-    photo: 'https://cdn.discordapp.com/attachments/1348907267956670474/1531661627630420109/content.png?ex=6a6a068c&is=6a68b50c&hm=9f2ad8fb3ca549dff1224c287799ece3a414bed0b530f0b86ec842787bdc1e66&?auto=compress&cs=tinysrgb&w=600',
-    socials: { linkedin: '#', twitter: '#', email: 'souleymane@tellyintech.com' },
+    icon: Heart,
+    title: 'Valeurs',
+    text: "Qualité sans compromis, ancrage local profond, tarifs justes et adaptés à la réalité économique guinéenne.",
     accent: 'orange',
-  },
-  {
-    name: 'Maimouna Faye Guene',
-    role: 'UX/UI & Product Designer',
-    bio: "Créative et empathique, Maimouna façonne des expériences numériques qui parlent aux utilisateurs. Elle marie esthétique, ergonomie et identité de marque dans chaque interface.",
-    bioEn: "Creative and empathetic, Maimouna crafts digital experiences that speak to users. She blends aesthetics, ergonomics and brand identity in every interface.",
-    expertise: ['UX Design', 'UI Design', 'Branding'],
-    expertiseEn: ['UX Design', 'UI Design', 'Branding'],
-    photo: 'https://media.licdn.com/dms/image/v2/D4E03AQFBWpDmQf5sqA/profile-displayphoto-shrink_800_800/B4EZgTuQk.H4Ag-/0/1752677550889?e=1786579200&v=beta&t=1STqEoKSiJqWNmzpgf9zvq1sxtO3es4nTbYn_vtpmPg',
-    socials: { linkedin: '#', twitter: '#', email: 'maimouna@tellyintech.com' },
-    accent: 'electric',
-  },
-  {
-    name: 'Mariama Hélène Ndong',
-    role: 'Marketing & Growth Manager',
-    bio: "Stratège de croissance, Mariama Hélène propulse la visibilité de Telly InTech et de ses clients. Elle analyse, teste et optimise pour transformer chaque visiteur en opportunité.",
-    bioEn: "Growth strategist, Mariama Hélène propels Telly InTech's visibility and that of its clients. She analyzes, tests and optimizes to turn every visitor into an opportunity.",
-    expertise: ['Growth', 'SEO', 'Analytics'],
-    expertiseEn: ['Growth', 'SEO', 'Analytics'],
-    photo: 'https://media.licdn.com/dms/image/v2/D4D03AQGV30c9NygBaQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1725397298147?e=1786579200&v=beta&t=cR6beJYCo3zCZC7pqIunmgiWwN6zxmKeYgXGC0y6-DA',
-    socials: { linkedin: '#', twitter: '#', email: 'mariama@tellyintech.com' },
-    accent: 'orange',
-  },
-  {
-    name: 'Adama Telly Bah',
-    role: 'Communications & PR Manager',
-    bio: "Voix de Telly InTech, Adama veille à l'image et au récit de l'entreprise. Elle tisse des liens avec les médias, les partenaires et la communauté pour rayonner au-delà du digital.",
-    bioEn: "Voice of Telly InTech, Adama ensures the company's image and narrative. She builds connections with media, partners and the community to shine beyond digital.",
-    expertise: ['Communicatiox`n', 'Relations Publiques', 'Médias'],
-    expertiseEn: ['Communication', 'PR', 'Media'],
-    photo: 'https://images.pexels.com/photos/3778680/pexels-photo-3778680.jpeg?auto=compress&cs=tinysrgb&w=600',
-    socials: { linkedin: '#', twitter: '#', email: 'adama@tellyintech.com' },
-    accent: 'electric',
   },
 ];
 
-export default function Team() {
-  const { t, lang } = useLanguage();
-  const sectionRef = useScrollAnimation();
-  const [hovered, setHovered] = useState<number | null>(null);
+const values = [
+  'Qualité sans compromis',
+  'Ancrage local profond',
+  'Tarifs justes et adaptés',
+  'Engagement social',
+  'Innovation continue',
+  'Transparence et confiance',
+];
 
+const team = [
+  { initials: 'FT', role: 'Fondateur & Directeur' },
+  { initials: 'DT', role: 'Responsable technique' },
+  { initials: 'ES', role: "Chargée d'engagement social" },
+  { initials: 'CR', role: 'Relation clients Guinée' },
+];
+
+function Pillar({ icon: Icon, title, text, accent }) {
+  const isOrange = accent === 'orange';
+  const main = isOrange ? colors.orange : colors.electric;
+  const soft = isOrange ? colors.orangeSoft : colors.electricSoft;
   return (
-    <section ref={sectionRef as React.RefObject<HTMLElement>}
-      className="relative bg-white dark:bg-navy-900 py-24 overflow-hidden">
-
-      {/* Subtle background grid */}
-      <div className="absolute inset-0 opacity-[0.02] pointer-events-none"
-        style={{
-          backgroundImage: `linear-gradient(to right, currentColor 1px, transparent 1px),
-                            linear-gradient(to bottom, currentColor 1px, transparent 1px)`,
-          backgroundSize: '40px 40px',
-        }}
-      />
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionHeader
-          subtitle={t.team.subtitle}
-          title={t.team.title}
-          description={t.team.description}
-        />
-
-        {/* Team grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {team.map((member, i) => {
-            const isOrange = member.accent === 'orange';
-            const isHovered = hovered === i;
-
-            return (
-              <div
-                key={i}
-                className={`animate-on-scroll-scale delay-${(i % 3) * 100} group`}
-                onMouseEnter={() => setHovered(i)}
-                onMouseLeave={() => setHovered(null)}
-              >
-                <div className="relative bg-white dark:bg-navy-800 rounded-2xl overflow-hidden
-                  border border-gray-100 dark:border-navy-700
-                  transition-all duration-500 hover:shadow-2xl hover:-translate-y-1">
-
-                  {/* Photo */}
-                  <div className="relative h-72 overflow-hidden">
-                    <img
-                      src={member.photo}
-                      alt={member.name}
-                      loading="lazy"
-                      className="w-full h-full object-cover transition-transform duration-700
-                        group-hover:scale-105"
-                    />
-                    {/* Gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-navy-900/90 via-navy-900/20 to-transparent" />
-
-                    {/* Expertise tags — reveal on hover */}
-                    <div className="absolute bottom-3 left-3 right-3 flex flex-wrap gap-1.5
-                      transition-all duration-500"
-                      style={{
-                        opacity: isHovered ? 1 : 0,
-                        transform: isHovered ? 'translateY(0)' : 'translateY(10px)',
-                      }}>
-                      {(lang === 'fr' ? member.expertise : member.expertiseEn).map((tag) => (
-                        <span key={tag}
-                          className={`px-2.5 py-1 rounded-full text-[10px] font-inter font-medium
-                            backdrop-blur-md border
-                            ${isOrange
-                              ? 'bg-brand-orange/20 text-brand-orange border-brand-orange/30'
-                              : 'bg-electric-500/20 text-electric-500 border-electric-500/30'
-                            }`}>
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* Accent bar */}
-                    <div className={`absolute top-0 left-0 right-0 h-1 ${isOrange ? 'bg-brand-orange' : 'bg-electric-500'}
-                      transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left`} />
-                  </div>
-
-                  {/* Info */}
-                  <div className="p-6">
-                    <h3 className="font-poppins font-bold text-lg text-navy dark:text-white mb-1">
-                      {member.name}
-                    </h3>
-                    <p className={`font-inter text-sm font-medium mb-3
-                      ${isOrange ? 'text-brand-orange' : 'text-electric-500'}`}>
-                      {member.role}
-                    </p>
-                    <p className="font-inter text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
-                      {lang === 'fr' ? member.bio : member.bioEn}
-                    </p>
-
-                    {/* Social links */}
-                    <div className="flex items-center gap-3 mt-5 pt-4 border-t border-gray-100 dark:border-navy-700">
-                      {member.socials.linkedin && (
-                        <a href={member.socials.linkedin}
-                          className="w-8 h-8 rounded-full bg-gray-100 dark:bg-navy-700
-                            flex items-center justify-center text-gray-500 dark:text-gray-400
-                            hover:bg-brand-orange hover:text-white transition-all duration-300">
-                          <Linkedin size={14} />
-                        </a>
-                      )}
-                      {member.socials.twitter && (
-                        <a href={member.socials.twitter}
-                          className="w-8 h-8 rounded-full bg-gray-100 dark:bg-navy-700
-                            flex items-center justify-center text-gray-500 dark:text-gray-400
-                            hover:bg-electric-500 hover:text-white transition-all duration-300">
-                          <Twitter size={14} />
-                        </a>
-                      )}
-                      {member.socials.email && (
-                        <a href={`mailto:${member.socials.email}`}
-                          className="w-8 h-8 rounded-full bg-gray-100 dark:bg-navy-700
-                            flex items-center justify-center text-gray-500 dark:text-gray-400
-                            hover:bg-navy hover:text-white transition-all duration-300">
-                          <Mail size={14} />
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+    <div
+      className="group rounded-2xl p-8 text-center transition-all duration-500 hover:-translate-y-1"
+      style={{ background: '#fff', border: '1px solid #ECEAE3' }}
+    >
+      <div
+        className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5 transition-all duration-300 group-hover:scale-110"
+        style={{ background: soft, color: main }}
+      >
+        <Icon size={28} strokeWidth={2} />
       </div>
-    </section>
+      <h3 className="font-bold text-xl mb-3" style={{ color: colors.ink, fontFamily: 'Poppins, sans-serif' }}>
+        {title}
+      </h3>
+      <p className="text-sm leading-relaxed" style={{ color: colors.slate }}>
+        {text}
+      </p>
+    </div>
+  );
+}
+
+export default function About() {
+  return (
+    <div style={{ fontFamily: 'Inter, sans-serif', background: colors.cream }}>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;900&family=Inter:wght@400;500;600&display=swap');
+      `}</style>
+
+      {/* Hero */}
+      <section
+        className="relative pt-28 pb-24 overflow-hidden"
+        style={{ background: `linear-gradient(135deg, ${colors.navy} 0%, ${colors.navySoft} 60%, ${colors.electric} 130%)` }}
+      >
+        <div
+          className="absolute inset-0 opacity-[0.15]"
+          style={{
+            backgroundImage: `radial-gradient(#fff 1px, transparent 1px)`,
+            backgroundSize: '18px 18px',
+          }}
+        />
+        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
+          <p
+            className="text-xs font-semibold uppercase mb-4"
+            style={{ color: colors.orange, letterSpacing: '0.25em' }}
+          >
+            Qui sommes-nous
+          </p>
+          <h1
+            className="font-black text-4xl md:text-6xl text-white mb-6"
+            style={{ fontFamily: 'Poppins, sans-serif' }}
+          >
+            À propos de Telly InTech
+          </h1>
+          <p className="text-white/70 text-lg max-w-xl mx-auto">
+            Une structure sociale et solidaire née à Dakar, au service de la transformation digitale guinéenne.
+          </p>
+        </div>
+
+        {/* Journey signature: Dakar -> Guinée */}
+        <div className="relative z-10 max-w-lg mx-auto mt-14 px-6">
+          <div className="flex items-center justify-between">
+            <div className="flex flex-col items-center gap-2">
+              <div
+                className="w-3 h-3 rounded-full"
+                style={{ background: colors.orange, boxShadow: `0 0 0 4px ${colors.orange}33` }}
+              />
+              <span className="text-white text-sm font-medium flex items-center gap-1">
+                <MapPin size={14} /> Dakar
+              </span>
+              <span className="text-white/50 text-xs">Naissance du projet</span>
+            </div>
+
+            <svg width="140" height="16" viewBox="0 0 140 16" className="mx-2 flex-shrink-0">
+              <line x1="0" y1="8" x2="140" y2="8" stroke="#fff" strokeOpacity="0.35" strokeWidth="1.5" strokeDasharray="4 5" />
+              <polygon points="132,3 140,8 132,13" fill="#fff" opacity="0.55" />
+            </svg>
+
+            <div className="flex flex-col items-center gap-2">
+              <div
+                className="w-3 h-3 rounded-full"
+                style={{ background: colors.electric, boxShadow: `0 0 0 4px ${colors.electric}33` }}
+              />
+              <span className="text-white text-sm font-medium flex items-center gap-1">
+                <MapPin size={14} /> Guinée
+              </span>
+              <span className="text-white/50 text-xs">Terrain d'action</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Story */}
+      <section className="py-20" style={{ background: '#fff' }}>
+        <div className="max-w-3xl mx-auto px-6 text-center">
+          <p className="text-lg md:text-xl leading-relaxed" style={{ color: colors.slate }}>
+            Telly InTech est une structure sociale et solidaire spécialisée dans la transformation digitale.
+            Née à Dakar d'une vision portée par un jeune Sénégalo-Guinéen, elle a l'ambition de mettre ses
+            compétences au service de la Guinée en combinant expertise technique, sens du terrain et
+            engagement social.
+          </p>
+        </div>
+      </section>
+
+      {/* Mission / Vision / Valeurs */}
+      <section className="py-24" style={{ background: colors.cream }}>
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {pillars.map((p, i) => (
+              <Pillar key={i} {...p} />
+            ))}
+          </div>
+
+          {/* Values */}
+          <div className="mt-20 max-w-3xl mx-auto">
+            <h3
+              className="font-bold text-2xl text-center mb-10"
+              style={{ color: colors.ink, fontFamily: 'Poppins, sans-serif' }}
+            >
+              Nos valeurs
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {values.map((v, i) => (
+                <div
+                  key={i}
+                  className="flex items-center gap-3 rounded-xl p-4"
+                  style={{ background: '#fff', border: '1px solid #ECEAE3' }}
+                >
+                  <div
+                    className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
+                    style={{ background: colors.orangeSoft }}
+                  >
+                    <Check size={16} style={{ color: colors.orange }} />
+                  </div>
+                  <span className="text-sm font-medium" style={{ color: colors.ink }}>
+                    {v}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Team */}
+      <section className="py-24" style={{ background: '#fff' }}>
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="text-center mb-14">
+            <p
+              className="text-xs font-semibold uppercase mb-3"
+              style={{ color: colors.electric, letterSpacing: '0.25em' }}
+            >
+              L'équipe
+            </p>
+            <h3
+              className="font-bold text-2xl md:text-3xl"
+              style={{ color: colors.ink, fontFamily: 'Poppins, sans-serif' }}
+            >
+              Des personnes engagées sur le terrain
+            </h3>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {team.map((m, i) => (
+              <div key={i} className="text-center">
+                <div
+                  className="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center font-bold"
+                  style={{
+                    background: i % 2 === 0 ? colors.orangeSoft : colors.electricSoft,
+                    color: i % 2 === 0 ? colors.orange : colors.electric,
+                    fontFamily: 'Poppins, sans-serif',
+                  }}
+                >
+                  {m.initials}
+                </div>
+                <p className="text-sm font-medium" style={{ color: colors.ink }}>
+                  {m.role}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section
+        className="py-20 text-center"
+        style={{ background: `linear-gradient(135deg, ${colors.navy}, ${colors.navySoft})` }}
+      >
+        <div className="max-w-2xl mx-auto px-6">
+          <h3
+            className="font-bold text-2xl md:text-3xl text-white mb-4"
+            style={{ fontFamily: 'Poppins, sans-serif' }}
+          >
+            Prêt à transformer votre présence digitale ?
+          </h3>
+          <p className="text-white/70 mb-8">
+            Parlons de votre projet et voyons comment nous pouvons vous accompagner.
+          </p>
+          <button
+            className="inline-flex items-center gap-2 font-semibold px-6 py-3 rounded-xl transition-transform hover:scale-105"
+            style={{ background: colors.orange, color: '#fff', fontFamily: 'Poppins, sans-serif' }}
+          >
+            Contactez-nous <ArrowRight size={18} />
+          </button>
+        </div>
+      </section>
+    </div>
   );
 }

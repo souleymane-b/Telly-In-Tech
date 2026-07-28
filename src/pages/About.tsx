@@ -3,6 +3,7 @@ import { useLanguage } from '@/hooks/useLanguage';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import PixelPattern from '@/components/ui/PixelPattern';
 import CTABanner from '@/components/home/CTABanner';
+import Team from '@/components/home/Team';
 
 export default function About() {
   const { t } = useLanguage();
@@ -103,6 +104,10 @@ export default function About() {
             </div>
           </div>
         </div>
+      </section>
+      <section>
+      <Team />
+
       </section>
 
       <CTABanner />

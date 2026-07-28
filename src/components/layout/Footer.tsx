@@ -56,7 +56,7 @@ export default function Footer() {
 
           {/* Brand */}
           <div className="lg:col-span-1">
-            <img src="/Logo_Telly_InTech.svg" alt="Telly InTech" className="h-14 w-auto mb-4 brightness-0 invert" />
+            <img src="/Logo_Telly_InTech.svg" alt="Telly InTech" className="h-28 w-auto mb-4 brightness-0 invert" />
             <p className="font-inter text-sm text-gray-400 leading-relaxed mb-5">
               {t.footer.description}
             </p>
