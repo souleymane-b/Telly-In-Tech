@@ -7,6 +7,7 @@ import ChatBot from '@/components/features/ChatBot';
 import CookieBanner from '@/components/features/CookieBanner';
 import ScrollProgress from '@/components/ui/ScrollProgress';
 import CustomCursor from '@/components/ui/CustomCursor';
+import LoadingScreen from '@/components/ui/LoadingScreen';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -70,6 +71,7 @@ export default function Layout({ children }: LayoutProps) {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <LoadingScreen />
       <ScrollProgress />
       <CustomCursor />
       <Navbar />

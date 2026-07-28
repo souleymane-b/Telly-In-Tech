@@ -12,12 +12,12 @@ export const translations = {
     },
     hero: {
       badge: 'Transformation Digitale · Guinée & Afrique de l\'Ouest',
-      headline1: 'Innover.',
-      headline2: 'Connecter.',
-      headline3: 'Transformer.',
+      headline1: 'Transformons',
+      headline2: 'vos idées en',
+      headline3: 'impact digital',
       subheadline: 'Le numérique au service de la Guinée',
       description: 'Telly InTech accompagne les entreprises, associations et initiatives citoyennes vers une présence digitale forte, crédible et connectée au monde.',
-      cta_primary: 'Découvrir nos services',
+      cta_primary: 'Démarrer votre transformation',
       cta_secondary: 'Voir nos réalisations',
     },
     stats: {
@@ -152,12 +152,12 @@ export const translations = {
     },
     hero: {
       badge: 'Digital Transformation · Guinea & West Africa',
-      headline1: 'Innovate.',
-      headline2: 'Connect.',
-      headline3: 'Transform.',
+      headline1: 'Turning',
+      headline2: 'your ideas into',
+      headline3: 'digital impact',
       subheadline: 'Digital technology at the service of Guinea',
       description: 'Telly InTech supports businesses, associations and citizen initiatives towards a strong, credible digital presence connected to the world.',
-      cta_primary: 'Discover our services',
+      cta_primary: 'Start your transformation',
       cta_secondary: 'See our work',
     },
     stats: {
