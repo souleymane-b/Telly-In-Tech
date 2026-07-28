@@ -60,7 +60,7 @@ const team: Member[] = [
     "TypeScript",
     "API Development"
   ]
-}
+},
   {
     name: 'Maimouna Faye Guene',
     role: 'UX/UI & Product Designer',
