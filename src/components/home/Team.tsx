@@ -68,7 +68,7 @@ const team: Member[] = [
     bioEn: "Growth strategist, Mariama Hélène propels Telly InTech's visibility and that of its clients. She analyzes, tests and optimizes to turn every visitor into an opportunity.",
     expertise: ['Growth', 'SEO', 'Analytics'],
     expertiseEn: ['Growth', 'SEO', 'Analytics'],
-    photo: 'https://images.pexels.com/photos/3760254/pexels-photo-3760254.jpeg?auto=compress&cs=tinysrgb&w=600',
+    photo: 'https://media.licdn.com/dms/image/v2/D4D03AQGV30c9NygBaQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1725397298147?e=1786579200&v=beta&t=cR6beJYCo3zCZC7pqIunmgiWwN6zxmKeYgXGC0y6-DA',
     socials: { linkedin: '#', twitter: '#', email: 'mariama@tellyintech.com' },
     accent: 'orange',
   },
