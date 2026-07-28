@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Linkedin, Twitter, Mail, UserCircle2 } from 'lucide-react';
+import { Linkedin, Twitter, Mail } from 'lucide-react';
 import { useLanguage } from '@/hooks/useLanguage';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import SectionHeader from '@/components/ui/SectionHeader';
@@ -24,7 +24,7 @@ const team: Member[] = [
     bioEn: "Visionary and strategist, Alpha steers Telly InTech with a deep conviction: digital technology can transform Guinea. He orchestrates growth, partnerships and the company's mission.",
     expertise: ['Stratégie', 'Leadership', 'Partenariats'],
     expertiseEn: ['Strategy', 'Leadership', 'Partnerships'],
-    photo: 'https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=600',
+    photo: 'https://media.licdn.com/dms/image/v2/D4E03AQEzmlhIIParuQ/profile-displayphoto-shrink_800_800/B4EZUzNs4tHMAk-/0/1740320985239?e=1786579200&v=beta&t=JgOi_T2_b3vaHvJNCJ5_igY1cU-j-77WMtztjBZBGP0',
     socials: { linkedin: '#', twitter: '#', email: 'alpha@tellyintech.com' },
     accent: 'orange',
   },
@@ -35,18 +35,18 @@ const team: Member[] = [
     bioEn: "Technical architect and builder, Moussa designs the robust infrastructures behind every project. From cloud architecture to security, he ensures technical excellence.",
     expertise: ['Architecture', 'Cloud', 'Sécurité'],
     expertiseEn: ['Architecture', 'Cloud', 'Security'],
-    photo: 'https://images.pexels.com/photos/3777943/pexels-photo-3777943.jpeg?auto=compress&cs=tinysrgb&w=600',
+    photo: 'https://media.licdn.com/dms/image/v2/D4E03AQGwMwepFDX5Gw/profile-displayphoto-crop_800_800/B4EZhHd_DSHoAI-/0/1753545700204?e=1786579200&v=beta&t=Q1e3wgsnuuJyAgVmaLoKfUf7PyK8lQZ-i54GOYzArN4',
     socials: { linkedin: '#', twitter: '#', email: 'moussa@tellyintech.com' },
     accent: 'electric',
   },
   {
     name: 'Souleymane Ndiaye',
     role: 'Lead Full-Stack Developer',
-    bio: "Souleymane conçoit et développe des applications web et mobiles modernes, en mettant l'accent sur la performance, la sécurité et une expérience utilisateur de qualité. Il participe aux choix d'architecture technique et veille à la qualité du code tout au long du cycle de développement.",
-    bioEn: "Souleymane designs and develops modern web and mobile applications with a strong focus on performance, security, and user experience. He contributes to technical architecture decisions and ensures high code quality throughout the development lifecycle.",
-    expertise: ['React', 'Next.js', 'Node.js', 'TypeScript', 'APIs'],
-    expertiseEn: ['React', 'Next.js', 'Node.js', 'TypeScript', 'APIs'],
-    photo: 'https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&w=600',
+    bio: "Développeur passionné et méticuleux, Souleymane transforme les idées en applications fonctionnelles. Du front-end au back-end, il code avec précision et veille à la performance.",
+    bioEn: "Passionate and meticulous developer, Souleymane turns ideas into functional applications. From front-end to back-end, he codes with precision and ensures performance.",
+    expertise: ['React', 'Node.js', 'APIs'],
+    expertiseEn: ['React', 'Node.js', 'APIs'],
+    photo: 'https://cdn.discordapp.com/attachments/1348907267956670474/1531661627630420109/content.png?ex=6a6a068c&is=6a68b50c&hm=9f2ad8fb3ca549dff1224c287799ece3a414bed0b530f0b86ec842787bdc1e66&',
     socials: { linkedin: '#', twitter: '#', email: 'souleymane@tellyintech.com' },
     accent: 'orange',
   },
@@ -57,7 +57,7 @@ const team: Member[] = [
     bioEn: "Creative and empathetic, Maimouna crafts digital experiences that speak to users. She blends aesthetics, ergonomics and brand identity in every interface.",
     expertise: ['UX Design', 'UI Design', 'Branding'],
     expertiseEn: ['UX Design', 'UI Design', 'Branding'],
-    photo: 'https://images.pexels.com/photos/3760263/pexels-photo-3760263.jpeg?auto=compress&cs=tinysrgb&w=600',
+    photo: 'https://media.licdn.com/dms/image/v2/D4E03AQFBWpDmQf5sqA/profile-displayphoto-shrink_800_800/B4EZgTuQk.H4Ag-/0/1752677550889?e=1786579200&v=beta&t=1STqEoKSiJqWNmzpgf9zvq1sxtO3es4nTbYn_vtpmPg',
     socials: { linkedin: '#', twitter: '#', email: 'maimouna@tellyintech.com' },
     accent: 'electric',
   },
@@ -68,7 +68,7 @@ const team: Member[] = [
     bioEn: "Growth strategist, Mariama Hélène propels Telly InTech's visibility and that of its clients. She analyzes, tests and optimizes to turn every visitor into an opportunity.",
     expertise: ['Growth', 'SEO', 'Analytics'],
     expertiseEn: ['Growth', 'SEO', 'Analytics'],
-    photo: 'https://images.pexels.com/photos/3760254/pexels-photo-3760254.jpeg?auto=compress&cs=tinysrgb&w=600',
+    photo: 'https://media.licdn.com/dms/image/v2/D4D03AQGV30c9NygBaQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1725397298147?e=1786579200&v=beta&t=cR6beJYCo3zCZC7pqIunmgiWwN6zxmKeYgXGC0y6-DA',
     socials: { linkedin: '#', twitter: '#', email: 'mariama@tellyintech.com' },
     accent: 'orange',
   },
@@ -77,7 +77,7 @@ const team: Member[] = [
     role: 'Communications & PR Manager',
     bio: "Voix de Telly InTech, Adama veille à l'image et au récit de l'entreprise. Elle tisse des liens avec les médias, les partenaires et la communauté pour rayonner au-delà du digital.",
     bioEn: "Voice of Telly InTech, Adama ensures the company's image and narrative. She builds connections with media, partners and the community to shine beyond digital.",
-    expertise: ['Communication', 'Relations Publiques', 'Médias'],
+    expertise: ['Communicatiox`n', 'Relations Publiques', 'Médias'],
     expertiseEn: ['Communication', 'PR', 'Media'],
     photo: 'https://images.pexels.com/photos/3778680/pexels-photo-3778680.jpeg?auto=compress&cs=tinysrgb&w=600',
     socials: { linkedin: '#', twitter: '#', email: 'adama@tellyintech.com' },
@@ -128,28 +128,14 @@ export default function Team() {
                   transition-all duration-500 hover:shadow-2xl hover:-translate-y-1">
 
                   {/* Photo */}
-                  <div className="relative h-72 overflow-hidden bg-gray-100 dark:bg-navy-700">
+                  <div className="relative h-72 overflow-hidden">
                     <img
                       src={member.photo}
                       alt={member.name}
                       loading="lazy"
                       className="w-full h-full object-cover transition-transform duration-700
                         group-hover:scale-105"
-                      onError={(e) => {
-                        const img = e.currentTarget;
-                        img.style.display = 'none';
-                        const fallback = img.nextElementSibling as HTMLElement | null;
-                        if (fallback) fallback.style.display = 'flex';
-                      }}
                     />
-                    {/* Fallback placeholder if image fails to load */}
-                    <div
-                      className="absolute inset-0 hidden items-center justify-center"
-                      style={{ display: 'none' }}
-                    >
-                      <UserCircle2 size={80} className="text-gray-300 dark:text-navy-500" />
-                    </div>
-
                     {/* Gradient overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-navy-900/90 via-navy-900/20 to-transparent" />
 
