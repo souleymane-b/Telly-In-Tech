@@ -49,9 +49,14 @@ export default function LoadingScreen() {
           }}
         >
           <div className="relative">
-            <div className="font-poppins font-black text-5xl text-white">TI</div>
+            <div className="font-poppins font-black text-5xl text-white">
+                 </div>
             <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-brand-orange to-electric-500
-              rounded-full" />
+              rounded-full" /> <img
+              src="/logo-s.png"
+              alt="Telly InTech"
+              className="h-34 lg:h-36 w-auto"
+            /> 
           </div>
         </div>
 

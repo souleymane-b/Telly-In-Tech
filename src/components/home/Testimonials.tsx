@@ -21,7 +21,7 @@ const testimonials: Testimonial[] = [
     role: 'Directrice',
     company: 'ONG Femme Active',
     message: 'Telly InTech a transformé notre présence en ligne. Le site web qu\'ils ont créé nous a permis de toucher de nouveaux donateurs et partenaires. Un travail professionnel et adapté à nos moyens.',
-    avatar: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=200',
+    avatar: 'logo-s.png',
     rating: 5,
   },
   {
@@ -30,7 +30,7 @@ const testimonials: Testimonial[] = [
     role: 'CEO',
     company: 'DialloTech SARL',
     message: 'Une équipe à l\'écoute, réactive et très compétente. Notre application mobile a été livrée dans les délais avec une qualité irréprochable. Je recommande vivement Telly InTech.',
-    avatar: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=200',
+    avatar: 'logo-s.png',
     rating: 5,
   },
   {
@@ -39,7 +39,7 @@ const testimonials: Testimonial[] = [
     role: 'Responsable Marketing',
     company: 'Conakry Foods',
     message: 'Grâce à leur stratégie digitale, nos ventes en ligne ont augmenté de 40% en trois mois. Leur approche locale et leur compréhension du marché guinéen font toute la différence.',
-    avatar: 'https://images.pexels.com/photos/3763188/pexels-photo-3763188.jpeg?auto=compress&cs=tinysrgb&w=200',
+    avatar: 'logo-s.png',
     rating: 5,
   },
   {
@@ -48,7 +48,7 @@ const testimonials: Testimonial[] = [
     role: 'Président',
     company: 'Coopérative Agricole de Kankan',
     message: 'Telly InTech nous a accompagnés dans la digitalisation de notre coopérative. Formation, support et suivi exemplaires. Nos membres peuvent désormais gérer leurs ventes en ligne.',
-    avatar: 'https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=200',
+    avatar: 'Logo_Telly_InTech.svg',
     rating: 5,
   },
 ];

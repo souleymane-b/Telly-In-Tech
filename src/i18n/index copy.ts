@@ -8,7 +8,6 @@ export const translations = {
       projects: 'Réalisations',
       about: 'À Propos',
       contact: 'Contact',
-      wcu: 'Pourquoi Nous Choisir',
       cta: 'Demander un devis',
     },
     hero: {
@@ -76,41 +75,6 @@ export const translations = {
         desc: 'Un accompagnement post-livraison assuré pour garantir la pérennité de vos solutions.',
       },
     },
-    whyPage: {
-      title: 'Pourquoi Nous Choisir',
-      subtitle: 'NOS DIFFÉRENCES',
-      description: 'Chez Telly InTech, nous ne livrons pas seulement des projets : nous bâtissons des relations durables, fondées sur la confiance, la compétence et une connaissance fine du terrain.',
-      features: [
-        {
-          title: 'Compréhension du terrain',
-          desc: 'Nous parlons le langage de nos clients. Notre ancrage en Guinée et en Afrique de l\'Ouest nous permet de saisir les réalités économiques, culturelles et sociales qui façonnent chaque projet.',
-          points: ['Connaissance fine du tissu économique local', 'Adaptation aux usages et contraintes du terrain', 'Proximité réelle avec nos clients et partenaires'],
-        },
-        {
-          title: 'Approche humaine',
-          desc: 'Derrière chaque ligne de code, il y a des personnes. Nous plaçons l\'écoute, la transparence et la bienveillance au cœur de notre relation client, du premier échange à la livraison finale.',
-          points: ['Écoute active et co-construction', 'Transparence totale sur l\'avancement', 'Accompagnement personnalisé à chaque étape'],
-        },
-        {
-          title: 'Expertise complète',
-          desc: 'Du développement web à la stratégie digitale, en passant par le design, le marketing et la cybersécurité, nous couvrons l\'ensemble de la chaîne de valeur numérique sous un même toit.',
-          points: ['Equipe pluridisciplinaire sous un même toit', 'Maîtrise des technologies modernes', 'De la stratégie à l\'exécution, sans intermédiaire'],
-        },
-        {
-          title: 'Accompagnement durable',
-          desc: 'Un projet ne s\'arrête pas à sa livraison. Nous restons à vos côtés pour la maintenance, l\'évolution et l\'optimisation de vos solutions dans la durée.',
-          points: ['Support post-livraison garanti', 'Maintenance et mises à jour continues', 'Évolution de vos solutions selon vos besoins'],
-        },
-        {
-          title: 'Rapport qualité-prix',
-          desc: 'Des tarifs justes et transparents, pensés pour la réalité économique guinéenne, sans jamais compromettre la qualité de nos livrables.',
-          points: ['Tarifs adaptés au marché local', 'Devis clairs et sans surprise', 'Qualité professionnelle à prix juste'],
-        },
-      ],
-      ctaTitle: 'Prêt à transformer votre présence digitale ?',
-      ctaDesc: 'Discutons de votre projet et construisons ensemble une solution sur-mesure.',
-      ctaButton: 'Demander un devis',
-    },
     projects: {
       title: 'Nos Réalisations',
       subtitle: 'PORTFOLIO',
@@ -120,17 +84,6 @@ export const translations = {
       mobile: 'Mobile',
       marketing: 'Marketing',
       view: 'Voir le projet',
-      sectors: 'Secteurs',
-      allSectors: 'Tous secteurs',
-      context: 'Contexte',
-      problem: 'Problématique',
-      solution: 'Solution apportée',
-      results: 'Résultats mesurables',
-      testimonial: 'Témoignage client',
-      close: 'Fermer',
-      noResults: 'Aucun projet ne correspond à ces critères.',
-      filterByType: 'Type de service',
-      filterBySector: "Secteur d'activité",
     },
     testimonials: {
       title: 'Ce que disent nos clients',
@@ -202,8 +155,6 @@ export const translations = {
       about: 'About',
       contact: 'Contact',
       cta: 'Get a Quote',
-      wcu: 'Why Choose Us',
-
     },
     hero: {
       badge: 'Digital Transformation · Guinea & West Africa',
@@ -270,41 +221,6 @@ export const translations = {
         desc: 'Post-delivery support to ensure the sustainability of your solutions.',
       },
     },
-    whyPage: {
-      title: 'Why Choose Us',
-      subtitle: 'OUR DIFFERENCES',
-      description: 'At Telly InTech, we don\'t just deliver projects: we build lasting relationships based on trust, expertise and a fine understanding of the field.',
-      features: [
-        {
-          title: 'Understanding of the field',
-          desc: 'We speak our clients\' language. Our roots in Guinea and West Africa allow us to grasp the economic, cultural and social realities that shape every project.',
-          points: ['Fine knowledge of the local economic fabric', 'Adaptation to field practices and constraints', 'Genuine proximity with our clients and partners'],
-        },
-        {
-          title: 'Human approach',
-          desc: 'Behind every line of code, there are people. We place listening, transparency and kindness at the heart of our client relationship, from the first exchange to final delivery.',
-          points: ['Active listening and co-construction', 'Total transparency on progress', 'Personalized support at every step'],
-        },
-        {
-          title: 'Complete expertise',
-          desc: 'From web development to digital strategy, through design, marketing and cybersecurity, we cover the entire digital value chain under one roof.',
-          points: ['Multidisciplinary team under one roof', 'Mastery of modern technologies', 'From strategy to execution, no intermediaries'],
-        },
-        {
-          title: 'Sustainable support',
-          desc: 'A project doesn\'t end at delivery. We stay by your side for maintenance, evolution and optimization of your solutions over time.',
-          points: ['Guaranteed post-delivery support', 'Continuous maintenance and updates', 'Evolution of your solutions as needs grow'],
-        },
-        {
-          title: 'Value for money',
-          desc: 'Fair and transparent pricing, designed for the Guinean economic reality, without ever compromising the quality of our deliverables.',
-          points: ['Pricing adapted to the local market', 'Clear quotes with no surprises', 'Professional quality at a fair price'],
-        },
-      ],
-      ctaTitle: 'Ready to transform your digital presence?',
-      ctaDesc: 'Let\'s discuss your project and build a tailored solution together.',
-      ctaButton: 'Request a quote',
-    },
     projects: {
       title: 'Our Projects',
       subtitle: 'PORTFOLIO',
@@ -314,17 +230,6 @@ export const translations = {
       mobile: 'Mobile',
       marketing: 'Marketing',
       view: 'View project',
-      sectors: 'Sectors',
-      allSectors: 'All sectors',
-      context: 'Context',
-      problem: 'Problem',
-      solution: 'Solution provided',
-      results: 'Measurable results',
-      testimonial: 'Client testimonial',
-      close: 'Close',
-      noResults: 'No project matches these criteria.',
-      filterByType: 'Service type',
-      filterBySector: 'Activity sector',
     },
     testimonials: {
       title: 'What our clients say',

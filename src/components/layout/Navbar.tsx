@@ -27,6 +27,7 @@ export default function Navbar() {
     { to: '/services', label: t.nav.services },
     { to: '/projets', label: t.nav.projects },
     { to: '/a-propos', label: t.nav.about },
+    { to: '/pourquoi-nous-choisir', label: t.nav.wcu},
     { to: '/contact', label: t.nav.contact },
   ];
 
@@ -43,9 +44,9 @@ export default function Navbar() {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 flex-shrink-0">
             <img
-              src="/Logo_Telly_InTech.svg"
+              src="/logo-s.png"
               alt="Telly InTech"
-              className="h-10 lg:h-12 w-auto"
+              className="h-14 lg:h-20 w-auto"
             />
           </Link>
 
@@ -89,6 +90,8 @@ export default function Navbar() {
             >
               {dark ? <Sun size={18} /> : <Moon size={18} />}
             </button>
+
+
 
             {/* CTA */}
             <Magnetic strength={0.2} className="ml-2">

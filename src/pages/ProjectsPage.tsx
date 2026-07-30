@@ -361,11 +361,12 @@ export default function ProjectsPage() {
 
       {/* Detail modal */}
       {selected && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
-          onClick={close}
-        >
-          <div className="absolute inset-0 bg-navy/80 backdrop-blur-sm animate-fade-in" />
+      <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
+      onClick={close}
+    >
+      <div className="absolute inset-0 bg-navy/80 backdrop-blur-sm animate-fade-in" />
+      
           <div
             className="relative bg-white dark:bg-navy-800 rounded-2xl shadow-2xl
               w-full max-w-3xl max-h-[90vh] overflow-y-auto animate-scale-in"
@@ -404,7 +405,7 @@ export default function ProjectsPage() {
                 <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-electric-100 dark:bg-electric-900/30 flex items-center justify-center text-electric-600 dark:text-electric-400">
                   <ClipboardList size={20} />
                 </div>
-                <div>
+                <div> 
                   <h3 className="font-poppins font-semibold text-navy dark:text-white mb-1">{t.projects.context}</h3>
                   <p className="font-inter text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{selected.context}</p>
                 </div>

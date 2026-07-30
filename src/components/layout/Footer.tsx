@@ -56,7 +56,7 @@ export default function Footer() {
 
           {/* Brand */}
           <div className="lg:col-span-1">
-            <img src="/Logo_Telly_InTech.svg" alt="Telly InTech" className="h-14 w-auto mb-4 brightness-0 invert" />
+            <img src="/Logo_Telly_InTech.svg" alt="Telly InTech" className="h-28 w-auto mb-4 brightness-0 invert" />
             <p className="font-inter text-sm text-gray-400 leading-relaxed mb-5">
               {t.footer.description}
             </p>
@@ -156,7 +156,7 @@ export default function Footer() {
                   <p className="font-inter text-xs text-gray-500 mb-0.5">{t.contact.phone_label}</p>
                   <a href="tel:+224000000000"
                     className="font-inter text-sm text-gray-300 hover:text-brand-orange transition-colors">
-                    +224 620 00 00 00
+                    +221 76 665 72 78
                   </a>
                 </div>
               </li>

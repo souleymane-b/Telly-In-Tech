@@ -19,7 +19,7 @@ const botReplies: Record<string, string[]> = {
     'Nous proposons des formules flexibles selon votre budget. Vous pouvez demander un devis gratuit.',
   ],
   contact: [
-    'Vous pouvez nous joindre par email : contact@tellyintech.com ou par téléphone : +224 620 00 00 00',
+    'Vous pouvez nous joindre par email : contact@tellyintech.com ou par téléphone : +221 76 665 72 78',
     'Nos bureaux sont à Dakar (Sénégal) et Conakry (Guinée). Quelle est votre localisation ?',
   ],
   default: [
