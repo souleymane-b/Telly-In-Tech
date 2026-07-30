@@ -9,7 +9,6 @@ import About from '@/pages/About';
 import WhyChooseUs from '@/pages/WhyChooseUs';
 import Contact from '@/pages/Contact';
 import NotFound from '@/pages/NotFound';
-import WhyChooseUs from '@/pages/whyChooseUs';
 
 export default function App() {
   return (
