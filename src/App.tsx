@@ -6,7 +6,6 @@ import Home from '@/pages/Home';
 import Services from '@/pages/Services';
 import ProjectsPage from '@/pages/ProjectsPage';
 import About from '@/pages/About';
-import WhyChooseUs from '@/pages/WhyChooseUs';
 import Contact from '@/pages/Contact';
 import NotFound from '@/pages/NotFound';
 import WhyChooseUs from '@/pages/whyChooseUs';
@@ -24,7 +23,6 @@ export default function App() {
               <Route path="/a-propos" element={<About />} />
               <Route path="/pourquoi-nous-choisir" element={<WhyChooseUs />} />
               <Route path="/contact" element={<Contact />} />
-              <Route path="/pourquoi-nous-choisir" element={<WhyChooseUs />} />
 
               <Route path="*" element={<NotFound />} />
             </Routes>
