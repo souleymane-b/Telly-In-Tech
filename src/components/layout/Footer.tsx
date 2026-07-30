@@ -156,7 +156,7 @@ export default function Footer() {
                   <p className="font-inter text-xs text-gray-500 mb-0.5">{t.contact.phone_label}</p>
                   <a href="tel:+224000000000"
                     className="font-inter text-sm text-gray-300 hover:text-brand-orange transition-colors">
-                    +224 620 00 00 00
+                    +221 76 665 72 78
                   </a>
                 </div>
               </li>

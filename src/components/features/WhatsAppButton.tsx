@@ -1,7 +1,7 @@
 import { MessageCircle } from 'lucide-react';
 
 export default function WhatsAppButton() {
-  const phoneNumber = '224620000000';
+  const phoneNumber = '221766657278';
   const message = encodeURIComponent('Bonjour, je vous contacte depuis le site Telly InTech. J\'aimerais en savoir plus sur vos services.');
 
   return (

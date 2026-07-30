@@ -31,7 +31,7 @@ export default function Hero() {
     <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden bg-navy">
       {/* Kinetic gradient background */}
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 "
         style={{
           background: 'linear-gradient(135deg, #212d55, #1a2444, #0c71b9, #1a2444, #212d55)',
           backgroundSize: '400% 400%',
@@ -70,11 +70,11 @@ export default function Hero() {
       </div>
 
       {/* ---- Content: 70/30 grid ---- */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-28 pb-16">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-2 pb-16">
         <div className="grid lg:grid-cols-[1fr_440px] gap-12 lg:gap-8 items-center">
 
           {/* ===== LEFT: Text (70%) ===== */}
-          <div className="text-left">
+          <div className="text-left pt-24">
             {/* Glass badge */}
             <div className="animate-fade-up animation-delay-100 inline-flex items-center gap-2
               rounded-full px-4 py-2 mb-8 overflow-hidden relative"
@@ -103,7 +103,7 @@ export default function Hero() {
                 <SplitText text={t.hero.headline2} delay={600} stagger={0.05} />
               </span>
               <span className="block overflow-hidden">
-                <span className="text-gradient-kinetic">
+                <span className="text-brand-orange">
                   <SplitText text={t.hero.headline3} delay={900} stagger={0.05} />
                 </span>
               </span>
@@ -160,9 +160,9 @@ export default function Hero() {
             </div>
 
             {/* Trust bar */}
-            <div className="animate-fade-up animation-delay-1700">
+            {/* <div className="animate-fade-up animation-delay-1700">
               <TrustBar />
-            </div>
+            </div> */}
           </div>
 
           {/* ===== RIGHT: Illustration (30%) ===== */}
