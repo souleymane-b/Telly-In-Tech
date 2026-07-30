@@ -81,7 +81,7 @@ const team = [
     bioEn: "Voice of Telly InTech, Adama ensures the image and story of the company. She builds relationships with media, partners, and the community to radiate beyond digital.",
     expertise: ['Communication', 'Relations Publiques', 'Médias'],
     expertiseEn: ['Communication', 'Public Relations', 'Medias'],
-    photo: 'logo-s.png',
+    photo: 'team/adama.jpeg',
     socials: { linkedin: '#', twitter: '#', email: 'adama@tellyintech.com' },
     accent: 'electric',
   },
