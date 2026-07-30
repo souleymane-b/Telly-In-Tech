@@ -8,7 +8,7 @@ import ProjectsPage from '@/pages/ProjectsPage';
 import About from '@/pages/About';
 import Contact from '@/pages/Contact';
 import NotFound from '@/pages/NotFound';
-import WhyChooseUs from './pages/whyChooseUs';
+import WhyChooseUs from '@/pages/whyChooseUs';
 
 export default function App() {
   return (
