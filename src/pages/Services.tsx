@@ -36,7 +36,7 @@ export default function Services() {
     {
       icon: GraduationCap,
       ...t.services.formation,
-      features: ['Formations sur-mesure', 'Bureautique avancée', 'Outils collaboratifs', 'Culture digitale'],
+      features: ['Formations sur-mesure', 'Bureautique avancée', 'Outils collaboratifs', 'Culture digitale', 'Intelligence artificielle'],
       color: 'orange',
     },
     {
