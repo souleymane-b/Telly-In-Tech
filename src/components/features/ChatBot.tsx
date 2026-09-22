@@ -15,16 +15,16 @@ const botReplies: Record<string, string[]> = {
     'Quel service vous intéresse en particulier ? Je peux vous donner plus de détails.',
   ],
   prix: [
-    'Nos tarifs sont adaptés à la réalité économique locale. Pour un devis précis, contactez-nous à contact@tellyintech.com',
+    'Nos tarifs sont adaptés à la réalité économique locale. Pour un devis précis, contactez-nous à telly.intech@gmail.com',
     'Nous proposons des formules flexibles selon votre budget. Vous pouvez demander un devis gratuit.',
   ],
   contact: [
-    'Vous pouvez nous joindre par email : contact@tellyintech.com ou par téléphone : +221 76 665 72 78',
+    'Vous pouvez nous joindre par email : telly.intech@gmail.com ou par téléphone : +224 625 03 52 48',
     'Nos bureaux sont à Dakar (Sénégal) et Conakry (Guinée). Quelle est votre localisation ?',
   ],
   default: [
     'Merci pour votre message ! Notre équipe vous répondra dans les plus brefs délais.',
-    'Pour toute question spécifique, n\'hésitez pas à nous contacter directement à contact@tellyintech.com',
+    'Pour toute question spécifique, n\'hésitez pas à nous contacter directement à telly.intech@gmail.com',
     'Pouvez-vous préciser votre besoin ? Je suis là pour vous aider.',
   ],
 };

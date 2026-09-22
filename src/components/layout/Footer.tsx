@@ -1,7 +1,23 @@
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin, Linkedin, Facebook, Twitter, Instagram, ArrowRight } from 'lucide-react';
+import { Mail, Phone, MapPin, Linkedin, Facebook, Instagram, ArrowRight } from 'lucide-react';
 import { useLanguage } from '@/hooks/useLanguage';
 import PixelPattern from '@/components/ui/PixelPattern';
+
+function Tiktok({ size = 16, className }: { size?: number; className?: string }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.01 1.97 2.89 2.89 0 0 1 2.24-4.73c.28 0 .54.04.79.1v3.24a6.15 6.15 0 0 0-.79-.05 6.16 6.16 0 1 0 6.16 6.16V8.77a8.16 8.16 0 0 0 4.83 1.57V6.89a4.85 4.85 0 0 1-1-.2z" />
+    </svg>
+  );
+}
 
 export default function Footer() {
   const { t } = useLanguage();
@@ -56,7 +72,7 @@ export default function Footer() {
 
           {/* Brand */}
           <div className="lg:col-span-1">
-            <img src="/Logo_Telly_InTech.svg" alt="Telly InTech" className="h-28 w-auto mb-4 brightness-0 invert" />
+            <img src="/Logo_Telly_InTech.svg" alt="Telly InTech" className="h-14 w-auto mb-4 brightness-0 invert" />
             <p className="font-inter text-sm text-gray-400 leading-relaxed mb-5">
               {t.footer.description}
             </p>
@@ -65,22 +81,52 @@ export default function Footer() {
             </p>
             {/* Social */}
             <div className="flex gap-3 mt-6">
+              {/* New Fenerte - Updated Social Links */}
               {[
-                { icon: Facebook, href: '#', label: 'Facebook' },
-                { icon: Linkedin, href: '#', label: 'LinkedIn' },
-                { icon: Twitter, href: '#', label: 'Twitter' },
-                { icon: Instagram, href: '#', label: 'Instagram' },
+                {
+                  icon: Facebook,
+                  href: 'https://www.facebook.com/share/1He6LUXrfC/?mibextid=wwXIfr',
+                  label: 'Facebook'
+                },  
+                {
+                  icon: Linkedin,
+                  href: 'https://www.linkedin.com/in/telly-intech-4765b9432?utm_source=share_via&utm_content=profile&utm_medium=member_ios',
+                  label: 'LinkedIn'
+                },
+                {
+                  icon: Instagram,
+                  href: 'https://www.instagram.com/telly.intech/',
+                  label: 'Instagram'
+                },
+                {
+                  icon: Tiktok,
+                  href: 'https://www.tiktok.com/@telly.intech',
+                  label: 'Tiktok'
+                }
+                // {
+                //   icon: Mail,
+                //   href: 'mailto:contact@fenerte.com',
+                //   label: 'Email'
+                // },
+                // {
+                //   icon: Phone,
+                //   href: 'tel:+224625035248',
+                //   label: 'Phone'
+                // }
               ].map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
                   href={href}
                   aria-label={label}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-9 h-9 rounded-full bg-white/10 hover:bg-brand-orange flex items-center
                     justify-center transition-colors duration-300"
                 >
                   <Icon size={16} />
                 </a>
               ))}
+         
             </div>
           </div>
 
@@ -141,9 +187,9 @@ export default function Footer() {
                 </div>
                 <div>
                   <p className="font-inter text-xs text-gray-500 mb-0.5">{t.contact.email_label}</p>
-                  <a href="mailto:contact@tellyintech.com"
+                  <a href="mailto:telly.intech@gmail.com"
                     className="font-inter text-sm text-gray-300 hover:text-brand-orange transition-colors">
-                    contact@tellyintech.com
+                    telly.intech@gmail.com
                   </a>
                 </div>
               </li>
@@ -154,9 +200,9 @@ export default function Footer() {
                 </div>
                 <div>
                   <p className="font-inter text-xs text-gray-500 mb-0.5">{t.contact.phone_label}</p>
-                  <a href="tel:+224000000000"
+                  <a href="tel:+224625035248"
                     className="font-inter text-sm text-gray-300 hover:text-brand-orange transition-colors">
-                    +221 76 665 72 78
+                    +224 625 03 52 48
                   </a>
                 </div>
               </li>

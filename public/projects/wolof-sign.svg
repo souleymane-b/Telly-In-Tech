@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 120" fill="none">
+  <title>Wolof Sign</title>
+  <defs><linearGradient id="brand" x2="1" y2="1"><stop stop-color="#00853F"/><stop offset="1" stop-color="#006D3F"/></linearGradient></defs>
+  <rect x="12" y="12" width="96" height="96" rx="12" fill="url(#brand)"/>
+  <rect x="36" y="36" width="48" height="48" rx="4" transform="rotate(45 60 60)" fill="#FDEF42"/>
+  <rect x="48" y="48" width="24" height="24" rx="4" fill="#E31B23"/>
+  <text x="132" y="77" font-family="Arial, sans-serif" font-size="52" font-weight="700" fill="#00853F">Wolof Sign</text>
+</svg>

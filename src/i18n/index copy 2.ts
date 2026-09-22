@@ -162,7 +162,7 @@ export const translations = {
       location_label: 'Bureaux',
     },
     footer: {
-      tagline: 'Innover. Connecter. Transformer.',
+      tagline: 'Transformer. Innover. Connecter..',
       description: 'Agence spécialisée dans la transformation digitale en Guinée et en Afrique de l\'Ouest.',
       links: 'Liens rapides',
       services_title: 'Services',
