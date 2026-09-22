@@ -143,8 +143,8 @@ Telly InTech
 
 Dakar, Sénégal – Conakry, Guinée
 
-[contact@tellyintech.com](mailto:contact@tellyintech.com)
+[telly.intech@gmail.com](mailto:telly.intech@gmail.com)
 
 [www.tellyintech.com](http://www.tellyintech.com)
 
-Innover. Connecter. Transformer.
+Transformer. Innover. Connecter..

@@ -49,8 +49,8 @@ export default function Contact() {
   };
 
   const contactInfo = [
-    { icon: Mail, label: t.contact.email_label, value: 'contact@tellyintech.com', href: 'mailto:contact@tellyintech.com', color: 'orange' },
-    { icon: Phone, label: t.contact.phone_label, value: '+221 76 665 72 78', href: 'tel:+221766657278', color: 'blue' },
+    { icon: Mail, label: t.contact.email_label, value: 'telly.intech@gmail.com', href: 'mailto:telly.intech@gmail.com', color: 'orange' },
+    { icon: Phone, label: t.contact.phone_label, value: '+224 625 03 52 48', href: 'tel:+224625035248', color: 'blue' },
     { icon: MapPin, label: t.contact.location_label, value: t.contact.address, href: '#', color: 'orange' },
   ];
 
