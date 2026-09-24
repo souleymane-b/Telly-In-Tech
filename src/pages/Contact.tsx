@@ -146,7 +146,7 @@ export default function Contact() {
                 border border-gray-100 dark:border-navy-700">
                 <input type="hidden" name="form-name" value="contact" />
                 <p hidden aria-hidden="true">
-                  <label>Leave this field empty <input name="bot-field" tabIndex={-1} autoComplete="off" /></label>
+                  <label>Leave this field empty  <input name="bot-field" tabIndex={-1} autoComplete="off" /></label>
                 </p>
 
                 {/* Status messages */}
