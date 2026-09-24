@@ -3,7 +3,6 @@ import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle, Loader2 } from 'lu
 import { useLanguage } from '@/hooks/useLanguage';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import PixelPattern from '@/components/ui/PixelPattern';
-import { supabase } from '@/lib/supabase';
 
 export default function Contact() {
   const { t } = useLanguage();
@@ -22,29 +21,31 @@ export default function Contact() {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (status === 'sending') return;
+    const fields = new FormData(e.currentTarget);
     setStatus('sending');
 
     try {
-      const { error } = await supabase.from('contact_submissions').insert({
-        name: form.name,
-        company: form.company || null,
-        email: form.email,
-        phone: form.phone || null,
-        service: form.service || null,
-        message: form.message,
+      // Netlify detects the matching static form in index.html at deploy time.
+      // Email recipients are configured in Netlify's submission notifications.
+      const body = new URLSearchParams();
+      fields.forEach((value, key) => body.append(key, String(value)));
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body.toString(),
+        signal: AbortSignal.timeout(20000),
       });
 
-      if (error) throw error;
+      if (!response.ok) throw new Error(`Contact submission failed (${response.status})`);
 
       setStatus('success');
       setForm({ name: '', company: '', email: '', phone: '', service: '', message: '' });
-      setTimeout(() => setStatus('idle'), 6000);
     } catch (err) {
       console.error('Contact form error:', err);
       setStatus('error');
-      setTimeout(() => setStatus('idle'), 6000);
     }
   };
 
@@ -141,22 +142,28 @@ export default function Contact() {
 
             {/* Form column */}
             <div className="lg:col-span-3 animate-on-scroll-right">
-              <form onSubmit={handleSubmit} className="bg-gray-50 dark:bg-navy-800 rounded-2xl p-6 md:p-8
+              <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" onSubmit={handleSubmit} className="bg-gray-50 dark:bg-navy-800 rounded-2xl p-6 md:p-8
                 border border-gray-100 dark:border-navy-700">
+                <input type="hidden" name="form-name" value="contact" />
+                <p hidden aria-hidden="true">
+                  <label>Leave this field empty <input name="bot-field" tabIndex={-1} autoComplete="off" /></label>
+                </p>
 
                 {/* Status messages */}
                 {status === 'success' && (
-                  <div className="mb-6 flex items-center gap-3 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800
+                  <div role="status" className="mb-6 flex items-center gap-3 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800
                     rounded-xl p-4 animate-fade-in">
                     <CheckCircle size={20} className="text-green-600 dark:text-green-400 flex-shrink-0" />
                     <p className="font-inter text-sm text-green-700 dark:text-green-300">{t.contact.success}</p>
                   </div>
                 )}
                 {status === 'error' && (
-                  <div className="mb-6 flex items-center gap-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800
+                  <div role="alert" className="mb-6 flex items-center gap-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800
                     rounded-xl p-4 animate-fade-in">
                     <AlertCircle size={20} className="text-red-600 dark:text-red-400 flex-shrink-0" />
-                    <p className="font-inter text-sm text-red-700 dark:text-red-300">{t.contact.error}</p>
+                    <p className="font-inter text-sm text-red-700 dark:text-red-300">{t.contact.error}{' '}
+                      <a href="mailto:telly.intech@gmail.com" className="underline">telly.intech@gmail.com</a>
+                    </p>
                   </div>
                 )}
 
