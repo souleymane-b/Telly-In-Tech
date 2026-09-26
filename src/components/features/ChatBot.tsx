@@ -1,208 +1,129 @@
 import { useState, useRef, useEffect } from 'react';
-import { MessageSquare, X, Send, Bot, ChevronDown } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { MessageSquare, X, Send, Bot, ChevronDown, Loader2 } from 'lucide-react';
 import { useLanguage } from '@/hooks/useLanguage';
 
-interface Message {
-  id: number;
-  text: string;
-  from: 'bot' | 'user';
-  time: string;
-}
-
-const botReplies: Record<string, string[]> = {
-  service: [
-    'Nous proposons : création web, applications mobiles, marketing digital, conseil IT, formation digitale et cybersécurité.',
-    'Quel service vous intéresse en particulier ? Je peux vous donner plus de détails.',
-  ],
-  prix: [
-    'Nos tarifs sont adaptés à la réalité économique locale. Pour un devis précis, contactez-nous à telly.intech@gmail.com',
-    'Nous proposons des formules flexibles selon votre budget. Vous pouvez demander un devis gratuit.',
-  ],
-  contact: [
-    'Vous pouvez nous joindre par email : telly.intech@gmail.com ou par téléphone : +224 625 03 52 48',
-    'Nos bureaux sont à Dakar (Sénégal) et Conakry (Guinée). Quelle est votre localisation ?',
-  ],
-  default: [
-    'Merci pour votre message ! Notre équipe vous répondra dans les plus brefs délais.',
-    'Pour toute question spécifique, n\'hésitez pas à nous contacter directement à telly.intech@gmail.com',
-    'Pouvez-vous préciser votre besoin ? Je suis là pour vous aider.',
-  ],
-};
-
-function getReply(text: string): string {
-  const lower = text.toLowerCase();
-  if (lower.includes('service') || lower.includes('offre') || lower.includes('que faites')) {
-    return botReplies.service[Math.floor(Math.random() * botReplies.service.length)];
-  }
-  if (lower.includes('prix') || lower.includes('tarif') || lower.includes('coût') || lower.includes('devis')) {
-    return botReplies.prix[Math.floor(Math.random() * botReplies.prix.length)];
-  }
-  if (lower.includes('contact') || lower.includes('joindre') || lower.includes('téléphone') || lower.includes('email')) {
-    return botReplies.contact[Math.floor(Math.random() * botReplies.contact.length)];
-  }
-  return botReplies.default[Math.floor(Math.random() * botReplies.default.length)];
-}
+interface Message { id: number; text: string; from: 'bot' | 'user' }
 
 export default function ChatBot() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
+  const fr = lang === 'fr';
   const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([
-    { id: 0, text: t.chatbot.greeting, from: 'bot', time: new Date().toLocaleTimeString('fr', { hour: '2-digit', minute: '2-digit' }) },
-  ]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
-  const [typing, setTyping] = useState(false);
-  const bottomRef = useRef<HTMLDivElement>(null);
+  const [pending, setPending] = useState('');
+  const [error, setError] = useState('');
+  const busy = useRef(false);
+  const controller = useRef<AbortController | null>(null);
+  const listRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
+  const nextId = useRef(0);
 
+  useEffect(() => () => controller.current?.abort(), []);
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages, typing]);
+    if (open) inputRef.current?.focus();
+  }, [open]);
+  useEffect(() => {
+    if (open && listRef.current) listRef.current.scrollTop = listRef.current.scrollHeight;
+  }, [messages, pending, open, error]);
 
-  const sendMessage = () => {
-    if (!input.trim()) return;
-
-    const userMsg: Message = {
-      id: messages.length + 1,
-      text: input,
-      from: 'user',
-      time: new Date().toLocaleTimeString('fr', { hour: '2-digit', minute: '2-digit' }),
-    };
-
-    const userInput = input;
-    setMessages(prev => [...prev, userMsg]);
+  const close = () => { setOpen(false); toggleRef.current?.focus(); };
+  const sendMessage = async (text = input) => {
+    const value = text.trim();
+    if (!value || busy.current) return;
+    busy.current = true;
+    setPending(value);
     setInput('');
-    setTyping(true);
-
-    setTimeout(() => {
-      const reply: Message = {
-        id: messages.length + 2,
-        text: getReply(userInput),
-        from: 'bot',
-        time: new Date().toLocaleTimeString('fr', { hour: '2-digit', minute: '2-digit' }),
-      };
-      setMessages(prev => [...prev, reply]);
-      setTyping(false);
-    }, 1200 + Math.random() * 800);
+    setError('');
+    const abort = new AbortController();
+    controller.current = abort;
+    const timeout = window.setTimeout(() => abort.abort(), 25000);
+    try {
+      const history = messages.slice(-10).map(message => ({
+        role: message.from === 'bot' ? 'assistant' : 'user',
+        content: message.text.slice(0, 1500),
+      }));
+      const response = await fetch('/.netlify/functions/chat', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: [...history, { role: 'user', content: value }] }),
+        signal: abort.signal,
+      });
+      if (!response.ok) throw new Error(response.status === 429 ? 'busy' : 'unavailable');
+      const result = await response.json();
+      if (typeof result.reply !== 'string' || !result.reply.trim()) throw new Error('unavailable');
+      const userId = nextId.current++;
+      const replyId = nextId.current++;
+      setMessages(previous => [...previous, { id: userId, text: value, from: 'user' }, { id: replyId, text: result.reply, from: 'bot' }].slice(-40) as Message[]);
+    } catch (err) {
+      setInput(value);
+      setError(err instanceof Error && err.message === 'busy'
+        ? (fr ? 'Trop de demandes. Réessayez dans une minute.' : 'Too many requests. Please try again in a minute.')
+        : (fr ? 'L’assistant IA est indisponible. Réessayez ou contactez notre équipe.' : 'The AI assistant is unavailable. Try again or contact our team.'));
+    } finally {
+      window.clearTimeout(timeout);
+      busy.current = false;
+      setPending('');
+      controller.current = null;
+    }
   };
+
+  const quickReplies = fr ? ['Nos services', 'Demander un devis', 'Nos réalisations'] : ['Our services', 'Request a quote', 'Our projects'];
 
   return (
     <>
-      {/* Toggle button */}
-      <button
-        onClick={() => setOpen(!open)}
-        className="fixed bottom-5 right-5 z-50 w-14 h-14 bg-navy rounded-full flex items-center
-          justify-center shadow-brand-lg hover:shadow-xl hover:scale-110 transition-all duration-300
-          group"
-        aria-label="Ouvrir le chat"
-      >
-        {open
-          ? <ChevronDown size={22} className="text-white" />
-          : <MessageSquare size={22} className="text-white" />
-        }
-        {!open && (
-          <span className="absolute -top-1 -right-1 w-4 h-4 bg-brand-orange rounded-full
-            text-white text-[9px] font-bold flex items-center justify-center">1</span>
-        )}
+      <button ref={toggleRef} onClick={() => setOpen(!open)}
+        aria-expanded={open} aria-controls="telly-chat"
+        aria-label={open ? (fr ? 'Fermer le chat' : 'Close chat') : (fr ? 'Ouvrir le chat' : 'Open chat')}
+        className="fixed bottom-5 right-5 z-50 w-14 h-14 bg-navy rounded-full flex items-center justify-center shadow-brand-lg hover:scale-105 transition-transform focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-orange">
+        {open ? <ChevronDown size={22} className="text-white" /> : <MessageSquare size={22} className="text-white" />}
       </button>
-
-      {/* Chat window */}
-      <div
-        className={`fixed bottom-24 right-5 z-50 w-80 sm:w-96 bg-white rounded-2xl shadow-brand-lg
-          overflow-hidden transition-all duration-400 origin-bottom-right
-          ${open ? 'opacity-100 scale-100 pointer-events-auto' : 'opacity-0 scale-90 pointer-events-none'}`}
-      >
-        {/* Header */}
-        <div className="bg-gradient-to-r from-navy to-electric-500 px-4 py-3 flex items-center gap-3">
-          <div className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center">
-            <Bot size={18} className="text-white" />
+      {open && (
+        <section id="telly-chat" role="dialog" aria-modal="false" aria-labelledby="telly-chat-title"
+          onKeyDown={event => { if (event.key === 'Escape') close(); }}
+          className="fixed bottom-24 right-3 sm:right-5 z-50 w-[calc(100vw-1.5rem)] sm:w-96 max-h-[calc(100dvh-7rem)] flex flex-col bg-white dark:bg-navy-800 rounded-2xl shadow-brand-lg overflow-hidden border border-gray-100 dark:border-navy-700">
+          <div className="bg-gradient-to-r from-navy to-electric-500 px-4 py-4 flex items-center gap-3 shrink-0">
+            <div className="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center"><Bot size={22} className="text-white" /></div>
+            <div className="flex-1">
+              <h2 id="telly-chat-title" className="font-poppins font-semibold text-white text-sm">{t.chatbot.title}</h2>
+              <p className="font-inter text-white/80 text-xs">{fr ? 'Assistant IA' : 'AI assistant'}</p>
+            </div>
+            <button onClick={close} aria-label={fr ? 'Fermer le chat' : 'Close chat'} className="p-2 text-white/80 hover:text-white"><X size={18} /></button>
           </div>
-          <div className="flex-1">
-            <p className="font-poppins font-semibold text-white text-sm">{t.chatbot.title}</p>
-            <p className="font-inter text-white/70 text-xs flex items-center gap-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block" />
-              En ligne
-            </p>
-          </div>
-          <button onClick={() => setOpen(false)} className="text-white/70 hover:text-white transition-colors">
-            <X size={18} />
-          </button>
-        </div>
-
-        {/* Messages */}
-        <div className="h-64 overflow-y-auto p-4 space-y-3 bg-gray-50">
-          {messages.map((msg) => (
-            <div
-              key={msg.id}
-              className={`flex ${msg.from === 'user' ? 'justify-end' : 'justify-start'}`}
-            >
-              {msg.from === 'bot' && (
-                <div className="w-6 h-6 rounded-full bg-navy flex items-center justify-center
-                  flex-shrink-0 mr-2 mt-0.5">
-                  <Bot size={12} className="text-white" />
+          <div ref={listRef} role="log" aria-live="polite" aria-relevant="additions text" aria-label={fr ? 'Conversation' : 'Conversation'}
+            className="min-h-0 h-72 overflow-y-auto p-4 space-y-3 bg-gray-50 dark:bg-navy-900">
+            <div className="bg-white dark:bg-navy-700 text-gray-700 dark:text-gray-100 rounded-2xl rounded-bl-sm p-3 text-sm shadow-sm">{t.chatbot.greeting}</div>
+            {messages.map(message => (
+              <div key={message.id} className={'flex ' + (message.from === 'user' ? 'justify-end' : 'justify-start')}>
+                <div className={'max-w-[90%] rounded-2xl px-3 py-2 text-sm leading-relaxed whitespace-pre-wrap break-words ' + (message.from === 'user' ? 'bg-navy text-white rounded-br-sm' : 'bg-white dark:bg-navy-700 text-gray-700 dark:text-gray-100 rounded-bl-sm shadow-sm')}>
+                  {message.text}
                 </div>
-              )}
-              <div className={`max-w-[75%] rounded-2xl px-3 py-2 ${
-                msg.from === 'user'
-                  ? 'bg-navy text-white rounded-br-sm'
-                  : 'bg-white text-gray-700 rounded-bl-sm shadow-sm'
-              }`}>
-                <p className="font-inter text-xs leading-relaxed">{msg.text}</p>
-                <p className={`font-inter text-[10px] mt-1 ${
-                  msg.from === 'user' ? 'text-white/60' : 'text-gray-400'
-                }`}>{msg.time}</p>
               </div>
-            </div>
-          ))}
-          {typing && (
-            <div className="flex justify-start">
-              <div className="w-6 h-6 rounded-full bg-navy flex items-center justify-center mr-2 mt-0.5">
-                <Bot size={12} className="text-white" />
-              </div>
-              <div className="bg-white rounded-2xl rounded-bl-sm px-4 py-3 shadow-sm flex gap-1">
-                {[0, 1, 2].map(i => (
-                  <span key={i} className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"
-                    style={{ animationDelay: `${i * 0.15}s` }} />
-                ))}
-              </div>
-            </div>
-          )}
-          <div ref={bottomRef} />
-        </div>
-
-        {/* Quick replies */}
-        <div className="px-3 py-2 bg-white border-t border-gray-100 flex gap-2 overflow-x-auto">
-          {['Nos services', 'Nos tarifs', 'Nous contacter'].map(q => (
-            <button
-              key={q}
-              onClick={() => { setInput(q); }}
-              className="flex-shrink-0 text-xs font-inter text-navy border border-navy/20
-                rounded-full px-3 py-1 hover:bg-navy hover:text-white transition-colors"
-            >
-              {q}
-            </button>
-          ))}
-        </div>
-
-        {/* Input */}
-        <div className="px-3 py-3 bg-white border-t border-gray-100 flex gap-2">
-          <input
-            type="text"
-            value={input}
-            onChange={e => setInput(e.target.value)}
-            onKeyDown={e => e.key === 'Enter' && sendMessage()}
-            placeholder={t.chatbot.placeholder}
-            className="flex-1 bg-gray-50 border border-gray-200 rounded-full px-4 py-2
-              font-inter text-xs text-gray-700 placeholder-gray-400 focus:outline-none
-              focus:border-electric-500 focus:ring-1 focus:ring-electric-500 transition-colors"
-          />
-          <button
-            onClick={sendMessage}
-            className="w-9 h-9 bg-brand-orange rounded-full flex items-center justify-center
-              hover:bg-brand-orange-dark transition-colors flex-shrink-0"
-          >
-            <Send size={14} className="text-white" />
-          </button>
-        </div>
-      </div>
+            ))}
+            {pending && <div className="space-y-3">
+              <div className="flex justify-end"><p className="max-w-[90%] bg-navy text-white rounded-2xl rounded-br-sm px-3 py-2 text-sm break-words">{pending}</p></div>
+              <p role="status" className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-300"><Loader2 size={14} className="animate-spin" />{fr ? 'L’assistant réfléchit…' : 'Thinking…'}</p>
+            </div>}
+            {error && <div role="alert" className="rounded-xl bg-orange-50 text-orange-900 p-3 text-xs leading-relaxed">{error}{' '}
+              <Link to="/contact" onClick={close} className="font-semibold underline">{fr ? 'Contacter l’équipe' : 'Contact our team'}</Link>
+            </div>}
+          </div>
+          <div className="flex flex-wrap gap-2 px-3 pt-3 shrink-0">
+            {quickReplies.map(question => <button key={question} disabled={!!pending} onClick={() => void sendMessage(question)}
+              className="text-xs text-navy dark:text-gray-200 border border-gray-200 dark:border-navy-600 rounded-full px-3 py-1.5 hover:border-brand-orange disabled:opacity-50">{question}</button>)}
+          </div>
+          <form onSubmit={event => { event.preventDefault(); void sendMessage(); }} className="flex gap-2 px-3 pt-3 shrink-0">
+            <input ref={inputRef} type="text" value={input} maxLength={1500} disabled={!!pending}
+              onChange={event => setInput(event.target.value)} aria-label={t.chatbot.placeholder} placeholder={t.chatbot.placeholder}
+              className="min-w-0 flex-1 bg-gray-50 dark:bg-navy-900 border border-gray-200 dark:border-navy-600 rounded-full px-4 py-2 font-inter text-sm text-gray-700 dark:text-white focus:outline-none focus:border-electric-500 disabled:opacity-50" />
+            <button type="submit" disabled={!!pending || !input.trim()} aria-label={t.chatbot.send}
+              className="w-10 h-10 bg-brand-orange text-white rounded-full flex items-center justify-center disabled:opacity-40 shrink-0"><Send size={16} /></button>
+          </form>
+          <p className="px-4 py-3 text-[10px] leading-relaxed text-gray-500 dark:text-gray-400 shrink-0">
+            {fr ? 'Vos messages sont envoyés à Google Gemini pour répondre. Évitez les données sensibles. L’IA peut se tromper.' : 'Your messages are sent to Google Gemini to generate replies. Avoid sensitive information. AI can make mistakes.'}
+          </p>
+        </section>
+      )}
     </>
   );
 }
